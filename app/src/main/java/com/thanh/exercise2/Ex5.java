@@ -32,6 +32,7 @@ public class Ex5 extends AppCompatActivity {
                     new String[]{Manifest.permission.CALL_PHONE},
                     1);
         }
+        //aa
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
