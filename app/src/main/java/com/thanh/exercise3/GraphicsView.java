@@ -70,6 +70,20 @@ public class GraphicsView extends View {
         mPlayer.start();
     }
 
+    //Bài 1
+    /*@Override
+    protected void onDraw(Canvas canvas){
+
+        Rect r=new Rect(40, 40, 400, 200);
+        Paint paint = new Paint();
+        paint.setStyle (Paint.Style. FILL);
+        paint.setColor(Color.RED);
+        canvas.drawRect (r, paint);
+
+        invalidate();
+
+    }
+
     //Bài 2
     /*@Override
     protected void onDraw(Canvas canvas){
