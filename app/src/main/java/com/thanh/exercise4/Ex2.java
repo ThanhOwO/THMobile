@@ -64,6 +64,7 @@ public class Ex2 extends Activity implements View.OnClickListener {
 
     }
 
+    //switch branch
     private void readData() {
         try {
             FileInputStream in = openFileInput("myfile.txt");
