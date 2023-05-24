@@ -3,11 +3,13 @@ package com.thanh.exercise4;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -44,41 +46,42 @@ public class Ex2 extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId()==R.id.btnreaddata)
         {
-            readData();
+            readData(v);
         }
         else if(v.getId() ==R.id.btnwritedata)
         {
-            writeData();
+            writeData(v);
         }
     }
 
-    private void writeData() {
+    public void writeData(View view) {
+        String text = editdata.getText().toString();
         try {
-            FileOutputStream out = openFileOutput("myfile.txt", 0);
-            OutputStreamWriter writer = new OutputStreamWriter(out);
-            writer.write(editdata.getText().toString());
-            writer.close();
+            FileOutputStream fos = openFileOutput("Ex2file.txt", Context.MODE_PRIVATE);
+            fos.write(text.getBytes());
+            fos.close();
+            Toast.makeText(this, "File saved.", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            Toast.makeText(this, "Error writing file.", Toast.LENGTH_SHORT).show();
         }
-
     }
 
-    //switch branch
-    private void readData() {
+    public void readData(View view) {
         try {
-            FileInputStream in = openFileInput("myfile.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String data = "";
-            StringBuilder builder = new StringBuilder();
-            while ((data = reader.readLine()) != null) {
-                builder.append(data);
-                builder.append("\n");
+            FileInputStream fis = openFileInput("Ex2file.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+                sb.append("\n");
             }
-            in.close();
-            editdata.setText(builder.toString());
+            editdata.setText(sb.toString());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            Toast.makeText(this, "Error reading file.", Toast.LENGTH_SHORT).show();
         }
     }
     
