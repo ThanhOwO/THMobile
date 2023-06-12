@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.thanh.week5.Ex2.Exercise2;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button nextExBtn;
